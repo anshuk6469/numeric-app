@@ -31,5 +31,13 @@ pipeline {
                }
             }
         }
+        stage('K8s-Deploy') {
+            steps {
+               withKubeConfig(credentialsId: 'kubeconfig') {
+                 sh "sed -i 's#replace#quay.io/anshuk6469/numeric-app:${GIT_COMMIT}#g' k8s_deploy_ser.yaml"
+                 sh "kubectl apply -f k8s_deploy_ser.yaml"
+               }
+            }
+        }
     }
 }
