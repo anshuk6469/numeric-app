@@ -35,11 +35,7 @@ pipeline {
         }
         stage('SAST SonrQube') {
             steps {
-              sh 'mvn clean verify sonar:sonar \
-                 -Dsonar.projectKey=numeric-application \
-                 -Dsonar.projectName='numeric-application' \
-                 -Dsonar.host.url=http://localhost:9000 \
-                 -Dsonar.token=sqp_14503ef80336f7baa0068d1c116dd3b43bf0f279'
+              sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.projectName="numeric-application" -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_14503ef80336f7baa0068d1c116dd3b43bf0f279'
             }
         }
         stage('Docker Build and Push') {
