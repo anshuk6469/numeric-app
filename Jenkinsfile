@@ -42,7 +42,7 @@ pipeline {
                  -Dsonar.token=sqp_14503ef80336f7baa0068d1c116dd3b43bf0f279'
             }
         }
-           stage('Docker Build and Push') {
+        stage('Docker Build and Push') {
             steps {
                 withDockerRegistry(credentialsId: 'quay-cred', url: 'https://quay.io') {
                    sh 'docker build -t quay.io/anshuk6469/numeric-app:""$GIT_COMMIT"" .'
