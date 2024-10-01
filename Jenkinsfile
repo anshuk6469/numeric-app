@@ -38,7 +38,11 @@ pipeline {
                 withSonarQubeEnv(credentialsId: 'Sonar-token') {
                   sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.projectName="numeric-application" '
                }
-              
+              timeout(time: 2,unit: 'Minutes') {
+                script {
+                    waitForQualityGate abortPipeline: true
+                }
+              }
             }
         }
         stage('Docker Build and Push') {
