@@ -23,6 +23,16 @@ pipeline {
                 }
             }
         }
+        stage('PIT Mutation Testing') {
+            steps {
+              sh 'mvn org.pitest:pitest-maven:scmMutationCoverage'
+            }
+            post {
+                always {
+                   pitmutation mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
+                }
+            }
+        }
            stage('Docker Build and Push') {
             steps {
                 withDockerRegistry(credentialsId: 'quay-cred', url: 'https://quay.io') {
