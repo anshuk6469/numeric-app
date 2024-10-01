@@ -35,8 +35,8 @@ pipeline {
         }
         stage('SAST SonrQube') {
             steps {
-                withSonarQubeEnv(credentialsId: 'Sonar-token') {
-                  sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.projectName="numeric-application" '
+                withSonarQubeEnv('SonarQube') {
+                  sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=numeric-application'
                }
               timeout(time: 2,unit: 'Minutes') {
                 script {
