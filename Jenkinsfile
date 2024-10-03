@@ -45,7 +45,7 @@ pipeline {
               }
             }
         }
-        stage('Vulnerability Scan') {
+        stage('Dependecies Vulnerability Scan') {
             steps {
               sh 'mvn dependency-check:check'
             }
@@ -53,6 +53,11 @@ pipeline {
                 always {
                    dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
                 }
+            }
+        }
+        stage('Trivy Base Image Scan') {
+            steps {
+               sh 'bash trivy-docker-image-scan.sh'
             }
         }
         stage('Docker Build and Push') {
