@@ -13,8 +13,8 @@ COPY src src
 RUN mvn clean package -DskipTests
 
 # Stage 2: Create the Docker image
-#FROM quay.io/anshuk6469/openjdk8
-FROM amazoncorretto:8u422-al2-native-jdk
+FROM quay.io/anshuk6469/openjdk8
+# FROM amazoncorretto:8u422-al2-native-jdk
 # Set the working directory inside the container
 WORKDIR /app
 
