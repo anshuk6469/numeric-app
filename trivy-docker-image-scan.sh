@@ -9,7 +9,7 @@ docker run -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:
 exit_code=$?
 echo "EXIT CODE : ${exit_code}"
 
-if [[ "${exit_code} == 0" ]]; then
+if [[ "${exit_code}" == 0 ]]; then
    echo "Image Scanning Completed. Vulnerabilities Found"
    exit 1;
    else
