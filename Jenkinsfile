@@ -60,6 +60,11 @@ pipeline {
                sh 'bash trivy-docker-image-scan.sh'
             }
         }
+        stage('Dockerfile Conf Scan') {
+            steps {
+               sh 'docker run --rm -v $(pwd):/project quay.io/anshuk6469/opaconftest test --policy docker-security.rego Dockerfile'
+            }
+        }
         stage('Docker Build and Push') {
             steps {
                 withDockerRegistry(credentialsId: 'quay-cred', url: 'https://quay.io') {
