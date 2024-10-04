@@ -1,5 +1,4 @@
 fileignoreconfig:
 - filename: zap.sh
-  checksum: b26310a87573fdeaf272d2bda06d99438caf7585b1106c1f5bead79fdbddac70
+  checksum: afb5361bfe4136f3d614f8be3c7edb7a8dfabb1e077a76ca212e039e3ede228a
 version: ""
-
