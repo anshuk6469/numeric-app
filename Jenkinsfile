@@ -4,6 +4,11 @@ pipeline {
     tools {
         maven "maven_new"
     }
+    environment {
+        serviceName = "devsecops-svc"
+        applicationURL="http://172.25.232.63"
+        applicationURI="increment/99"
+    }
 
     stages {
         stage('Build') {
@@ -78,6 +83,13 @@ pipeline {
                withKubeConfig(credentialsId: 'kubeconfig') {
                  sh "sed -i 's#replace#quay.io/anshuk6469/numeric-app:${GIT_COMMIT}#g' k8s_deploy_ser.yaml"
                  sh "kubectl apply -f k8s_deploy_ser.yaml"
+               }
+            }
+        }
+         stage('Integration Testing') {
+            steps {
+               withKubeConfig(credentialsId: 'kubeconfig') {
+                 sh "bash integration-test.sh"
                }
             }
         }
