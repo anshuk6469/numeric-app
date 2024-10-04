@@ -93,5 +93,17 @@ pipeline {
                }
             }
         }
+         stage('OWASP ZAP DAST ') {
+            steps {
+               withKubeConfig(credentialsId: 'kubeconfig') {
+                 sh "bash zap.sh"
+               }
+            }
+            post {
+               always {
+                  publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'owasp-zap-report', reportFiles: 'zapreport.html', reportName: 'OWASP ZAP HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+                }
+            }
+        }
     }
 }
